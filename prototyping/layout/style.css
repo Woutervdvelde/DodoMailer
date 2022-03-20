@@ -1,0 +1,57 @@
+* {margin: 0; padding: 0; user-select: none; font-family: 'Roboto', sans-serif;}
+
+:root {
+    --grid-cell-size-w: calc(100vw / 4);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: var(--grid-cell-size-w) var(--grid-cell-size-w) var(--grid-cell-size-w) var(--grid-cell-size-w);
+    grid-template-rows: calc(100vh * .05) calc(100vh * .95);
+    grid-template-areas: 
+    "header header header header"
+    "main main main sidebar";
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+.header {
+    grid-area: header;
+    background-color: #FFF;
+    -webkit-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #FFF;
+    -webkit-box-shadow: -5px 0px 10px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -5px 0px 10px -5px rgba(0,0,0,0.75);
+    box-shadow: -5px 0px 10px -5px rgba(0,0,0,0.75);
+    overflow: hidden;
+    z-index: 9;
+}
+
+.main {
+    grid-area: main;
+    background-color: #F0F0F0;
+}
+
+.content {
+    width: 90%;
+    height: 100%;
+    background-color: #FFF;
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+
+.temp {
+    height: 2000px;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0%, rgba(0,212,255,1) 100%);
+}
