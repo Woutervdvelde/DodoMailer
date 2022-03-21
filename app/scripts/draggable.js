@@ -1,4 +1,5 @@
 var dragged;
+var dragged_last_parent;
 const content = document.getElementById("content");
 
 const dropzone = () => {
@@ -32,6 +33,7 @@ const showOutlines = (show = true) => {
 
 document.ondragstart = (e) => {
     dragged = e.target;
+    dragged_last_parent = e.target.parentElement;
     e.target.style.opacity = .5;
     showDropzones();
     showOutlines(true);
@@ -75,27 +77,24 @@ document.ondrop = (e) => {
 }
 
 const checkPlaceholders = (e) => {
-    for (let elem of e.target.parentElement.querySelectorAll(".placeholder")) {
-        console.log(elem.parentElement);
-        if (elem.parentElement.id == "content") {
-            elem.parentElement.removeChild(elem);
-            break;
-        } else if (elem.parentElement.tagName == "TD")
-            elem.parentElement.removeChild(elem);
-    };
+    //TODO BUG: removes too many placeholders
+    // for (let elem of e.target.parentElement.querySelectorAll(".placeholder")) {
+    //     if (e.target.parentElement.id == "content") {
+    //         console.log("parent is content container");
+    //         elem.parentElement.removeChild(elem);
+    //         break;
+    //     } else if (elem.parentElement.tagName == "TD") {
+    //         console.log(`removing child from TD`)
+    //         elem.parentElement.removeChild(elem);
+    //     }
+    // };
+    console.log(e.target.previousElementSibling);
+    if (e.target.previousElementSibling.classList.contains("placeholder"))
+        e.target.parentElement.removeChild(e.target.previousElementSibling)
 
-    //add placeholder in old location (if needed)
-    /**
-     * BUGS:
-     *      adds extra placeholder when not needed
-     *      recreate: Add layout
-     *              -> add text inside layout
-     *              -> move text underneath itself
-     *              = extra placeholder in same column is created
-     */
-
-    if (dragged.parentElement.tagName == "TD" && dragged.parentElement.children.length == 2)
-        dragged.parentElement.appendChild(new Placeholder().element);
+    //when children = 1 since the dropzone is still active
+    if (dragged_last_parent.tagName == "TD" && dragged_last_parent.children.length == 1)
+        dragged_last_parent.appendChild(new Placeholder().element);
 }
 
 const addElement = (e) => {
