@@ -66,11 +66,7 @@ document.ondragleave = (e) => {
 document.ondrop = (e) => {
     e.preventDefault();
     if (e.target.className == "dropzone") {
-        e.target.parentElement.querySelectorAll(".placeholder").forEach(elem => {
-            if (elem.parentElement.id == "content" || elem.parentElement.tagName == "td")
-                elem.parentElement.removeChild(elem);
-        });
-
+        checkPlaceholders(e);
         if (dragged.component != null)
             addElement(e);
         else
@@ -78,9 +74,42 @@ document.ondrop = (e) => {
     }
 }
 
+const checkPlaceholders = (e) => {
+    //remove placeholders in new location
+    /**
+     * BUGS:
+     *      removes all placeholders in table
+     *      recreate: Add layout 
+*                   -> add text inside layout
+                    -> add layout underneath 
+                    -> move text underneath layout 
+                    = all placeholders in the last added layout are now gone.
+     */
+
+    e.target.parentElement.querySelectorAll(".placeholder").forEach(elem => {
+        if (elem.parentElement.id == "content" || elem.parentElement.tagName == "TD")
+            elem.parentElement.removeChild(elem);
+    });
+
+    //add placeholder in old location (if needed)
+    /**
+     * BUGS:
+     *      adds extra placeholder when not needed
+     *      recreate: Add layout
+     *              -> add text inside layout
+     *              -> move text underneath itself
+     *              = extra placeholder in same column is created
+     */
+    console.log(dragged.parentElement.tagName);
+    console.log(dragged.parentElement.children.length)
+    if (dragged.parentElement.tagName == "TD" && dragged.parentElement.children.length == 2)
+        dragged.parentElement.appendChild(new Placeholder().element);
+}
+
 const addElement = (e) => {
     let element = new dragged.component.constructor().element;
     e.target.parentNode.appendChild(element);
+    
 }
 
 const moveElement = (e) => {

@@ -1,0 +1,24 @@
+* {margin: 0; padding: 0; user-select: none; font-family: 'Roboto', sans-serif;}
+
+:root {
+    --grid-cell-size-w: calc(100vw / 4);
+
+    --spacing-tiny: .25rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 2.5rem;
+
+    --border-select-width: 5px;
+
+    --outline-color-100: rgba(0,0,0, 18%);
+    --outline-color-300: rgba(0,0,0, 38%);
+
+    --color-success: #2EC4B6;
+    --color-error: #FF3366;
+    --color-neutral-100: #FFFFFF;
+    --color-neutral-300: #FAFAFA;
+    --color-neutral-400: #F6F7F8;
+    --color-blue: #20A4F3;
+    --color-black: #011627;
+}

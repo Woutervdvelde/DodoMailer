@@ -1,18 +1,3 @@
-* {margin: 0; padding: 0; user-select: none; font-family: 'Roboto', sans-serif;}
-
-:root {
-    --color-success: #2EC4B6;
-    --color-error: #FF3366;
-    --color-neutral-100: #FFFFFF;
-    --color-neutral-300: #FAFAFA;
-    --color-neutral-400: #F6F7F8;
-    --color-blue: #20A4F3;
-    --color-black: #011627;
-
-    --border-select-width: 5px;
-    
-}
-
 .selected {
     border: var(--border-select-width) solid var(--color-blue);
     border-radius: 5px;

@@ -41,14 +41,14 @@ class Placeholder extends Component {
 }
 
 class Layout extends Component {
-    method = 'somemethod';
+    name = "layout";
     constructor(name) {
         super(name, 'fa-border-all')
     }
 
     createBaseElement(className) {
         let elem = this.createTable(3);
-        elem.classList.add(...["layout", className]);
+        elem.classList.add(...["layout", "layout-1-1-1", className]);
         this.DOMelement = elem;
     }
 
@@ -68,15 +68,21 @@ class Layout extends Component {
 }
 
 class Text extends Component {
+    name = "text";
     text = lorem;
     constructor(name) {
         super(name, 'fa-align-justify')
     }
+
+    createBaseElement(className) {
+        super.createBaseElement(className);
+        this.DOMelement.innerText = lorem;
+    }
 }
 
 const options = [
-    new Layout('layout'),
-    new Text('Text')
+    new Layout(),
+    new Text()
 ]
 
 

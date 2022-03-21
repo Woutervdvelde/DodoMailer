@@ -1,16 +1,3 @@
-* {margin: 0; padding: 0; user-select: none; font-family: 'Roboto', sans-serif;}
-
-:root {
-    --grid-cell-size-w: calc(100vw / 4);
-    --spacing-tiny: .25rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 2.5rem;
-    --outline-color-100: rgba(0,0,0, 18%);
-    --outline-color-300: rgba(0,0,0, 38%);
-}
-
 .container {
     display: grid;
     grid-template-columns: var(--grid-cell-size-w) var(--grid-cell-size-w) var(--grid-cell-size-w) var(--grid-cell-size-w);
@@ -102,4 +89,8 @@
 
 .layout:hover td {
     border: 2px solid var(--outline-color-100);
+}
+
+.layout-1-1-1 td {
+    width: calc(100% / 3);
 }
