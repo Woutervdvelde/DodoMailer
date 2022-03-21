@@ -327,6 +327,7 @@ modules.xml
 *.ipr
 
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
