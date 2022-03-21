@@ -66,30 +66,23 @@ document.ondragleave = (e) => {
 document.ondrop = (e) => {
     e.preventDefault();
     if (e.target.className == "dropzone") {
-        checkPlaceholders(e);
         if (dragged.component != null)
             addElement(e);
         else
             moveElement(e);
+        checkPlaceholders(e);
     }
 }
 
 const checkPlaceholders = (e) => {
-    //remove placeholders in new location
-    /**
-     * BUGS:
-     *      removes all placeholders in table
-     *      recreate: Add layout 
-*                   -> add text inside layout
-                    -> add layout underneath 
-                    -> move text underneath layout 
-                    = all placeholders in the last added layout are now gone.
-     */
-
-    e.target.parentElement.querySelectorAll(".placeholder").forEach(elem => {
-        if (elem.parentElement.id == "content" || elem.parentElement.tagName == "TD")
+    for (let elem of e.target.parentElement.querySelectorAll(".placeholder")) {
+        console.log(elem.parentElement);
+        if (elem.parentElement.id == "content") {
             elem.parentElement.removeChild(elem);
-    });
+            break;
+        } else if (elem.parentElement.tagName == "TD")
+            elem.parentElement.removeChild(elem);
+    };
 
     //add placeholder in old location (if needed)
     /**
@@ -100,8 +93,7 @@ const checkPlaceholders = (e) => {
      *              -> move text underneath itself
      *              = extra placeholder in same column is created
      */
-    console.log(dragged.parentElement.tagName);
-    console.log(dragged.parentElement.children.length)
+
     if (dragged.parentElement.tagName == "TD" && dragged.parentElement.children.length == 2)
         dragged.parentElement.appendChild(new Placeholder().element);
 }
