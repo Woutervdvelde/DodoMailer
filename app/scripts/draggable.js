@@ -68,38 +68,32 @@ document.ondragleave = (e) => {
 document.ondrop = (e) => {
     e.preventDefault();
     if (e.target.className == "dropzone") {
+        checkRemovePlaceholders(e);
         if (dragged.component != null)
             addElement(e);
         else
             moveElement(e);
-        checkPlaceholders(e);
+        checkAddPlaceholders(e);
     }
 }
 
-const checkPlaceholders = (e) => {
-    //TODO BUG: removes too many placeholders
-    // for (let elem of e.target.parentElement.querySelectorAll(".placeholder")) {
-    //     if (e.target.parentElement.id == "content") {
-    //         console.log("parent is content container");
-    //         elem.parentElement.removeChild(elem);
-    //         break;
-    //     } else if (elem.parentElement.tagName == "TD") {
-    //         console.log(`removing child from TD`)
-    //         elem.parentElement.removeChild(elem);
-    //     }
-    // };
-    console.log(e.target.previousElementSibling);
-    if (e.target.previousElementSibling.classList.contains("placeholder"))
-        e.target.parentElement.removeChild(e.target.previousElementSibling)
-
-    //when children = 1 since the dropzone is still active
-    if (dragged_last_parent.tagName == "TD" && dragged_last_parent.children.length == 1)
-        dragged_last_parent.appendChild(new Placeholder().element);
+const checkRemovePlaceholders = (e) => {
+    if (e.target.previousElementSibling && e.target.previousElementSibling.classList.contains("placeholder"))
+        e.target.parentElement.removeChild(e.target.previousElementSibling);
+    if (e.target.nextElementSibling && e.target.nextElementSibling.classList.contains("placeholder"))
+        e.target.nextElementSibling.removeChild(e.target.nextElementSibling);
+}
+const checkAddPlaceholders = (e) => {
+    console.log(dragged_last_parent);
+    console.log(dragged_last_parent.childNodes);
+    console.log(dragged_last_parent.childElementCount);
+    if (dragged_last_parent.childElementCount == 1)
+        dragged_last_parent.appendChild(new Placeholder().element)
 }
 
 const addElement = (e) => {
     let element = new dragged.component.constructor().element;
-    e.target.parentNode.appendChild(element);
+    e.target.parentNode.insertBefore(element, e.target);
     
 }
 
