@@ -81,10 +81,15 @@
 
 .layout {
     width: 100% !important;
+    border: 2px solid transparent;
 }
 
 .layout:hover {
     border: 2px solid var(--outline-color-100);
+}
+
+.layout td {
+    border: 2px solid transparent;
 }
 
 .layout:hover td {
