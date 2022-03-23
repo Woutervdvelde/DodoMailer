@@ -17,9 +17,13 @@ class Component {
         return this.DOMelement;
     }
 
-    createBaseElement(className) {
-        let elem = document.createElement("div");
-        elem.classList.add(...[className, this.name]);
+    createBaseElement(className, elem) {
+        if (!elem)
+            elem = document.createElement("div");
+
+        if (typeof(className) != 'object')
+            className = [className];
+        elem.classList.add(...[...className, this.name]);
         elem.draggable = true;
         this.DOMelement = elem;
     }
@@ -48,8 +52,7 @@ class Layout extends Component {
 
     createBaseElement(className) {
         let elem = this.createTable(3);
-        elem.classList.add(...["layout", "layout-1-1-1", className]);
-        this.DOMelement = elem;
+        super.createBaseElement(["layout", "layout-1-1-1", className], elem);
     }
 
     createTable(amount, insides = []) {
