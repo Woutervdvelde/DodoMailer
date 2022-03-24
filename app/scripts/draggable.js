@@ -12,9 +12,11 @@ const showDropzones = () => {
     if (content.children.length > 0 && !content.children[0].classList.contains("placeholder"))
         content.insertAdjacentElement("afterbegin",dropzone());
     document.querySelectorAll(".component, .placeholder").forEach((e, i) => {
+        console.log($(dragged).find(e));
         if (e.previousElementSibling != null && !e.previousElementSibling.classList.contains("dropzone"))
             e.before(dropzone());
-        e.after(dropzone());
+        if ($(dragged).find(e).length == 0)
+            e.after(dropzone());
     });
 }
 
